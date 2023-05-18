@@ -1,0 +1,7 @@
+﻿*
+!.gitignore
+!*.h
+!*.cpp
+!*.txt
+!*.sln
+!*.vcxproj
