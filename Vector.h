@@ -32,7 +32,7 @@ namespace MB {
 		size_t max_size() const;
 		void resize(const size_t new_size);
 		size_t capacity() const;
-		//void shrink_to_fit();
+		void shrink_to_fit();
 
 		void clear();
 		void push_back(T value);
@@ -164,6 +164,14 @@ namespace MB {
 	template<class T>
 	inline size_t Vector<T>::capacity() const {
 		return m_capacity;
+	}
+
+	template<class T>
+	inline void Vector<T>::shrink_to_fit() {
+		if (m_size == m_capacity) {
+			return;
+		}
+		resize(m_size);
 	}
 
 	template<class T>

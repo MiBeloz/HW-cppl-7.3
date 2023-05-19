@@ -2,6 +2,8 @@
 
 #include "Vector.h"
 
+template<typename T>
+void print_Vector(const MB::Vector<T>& vector);
 
 int main() {
 	setlocale(LC_ALL, "ru");
@@ -9,27 +11,58 @@ int main() {
 
 	MB::Vector<int> my_vector;
 
+	std::cout << "my_vector:" << std::endl;
 	try {
-		std::cout << "Проверка метода 'at()' на пустом векторе:" << std::endl;
-		std::cout << "at(0): ";
-		std::cout << my_vector.at(0) << std::endl;
+		std::cout << "\tПроверка метода 'at()' на пустом векторе:" << std::endl;
+		std::cout << "\tat(0): ";
+		std::cout << "\t" << my_vector.at(0) << std::endl;
 	}
 	catch (const std::exception& ex) {
 		std::cout << ex.what() << std::endl;
 	}
 
-	std::cout << "size(): " << my_vector.size() << std::endl;
-	std::cout << "capacity(): " << my_vector.capacity() << std::endl << std::endl;
+	std::cout << "\tsize(): " << my_vector.size() << std::endl;
+	std::cout << "\tcapacity(): " << my_vector.capacity() << std::endl << std::endl;
 
-	std::cout << "Проверка методов 'push_back()', 'size()', 'capacity()':" << std::endl;
+	std::cout << "\tПроверка методов 'push_back()', 'size()', 'capacity()':" << std::endl;
 	for (int i = 0; i < 10; ++i) {
-		std::cout << "Добавление элемента со значением '" << i << "':" << std::endl;
+		std::cout << "\tДобавление элемента со значением '" << i << "':" << std::endl;
 		my_vector.push_back(i);
-		std::cout << "at(" << i << "): " << my_vector.at(i) << std::endl;
-		std::cout << "size(): " << my_vector.size() << std::endl;
-		std::cout << "capacity(): " << my_vector.capacity() << std::endl << std::endl;
+		std::cout << "\tat(" << i << "): " << my_vector.at(i) << std::endl;
+		std::cout << "\tsize(): " << my_vector.size() << std::endl;
+		std::cout << "\tcapacity(): " << my_vector.capacity() << std::endl << std::endl;
 	}
+
+
+	MB::Vector<int> my_vector_2(10, 5);
+
+	std::cout << "my_vector_2:" << std::endl;
+	std::cout << "\tcapacity() при создании вектора на 10 элементов со значением '5': " << my_vector_2.capacity() << std::endl;
+	my_vector_2.resize(100);
+	std::cout << "\tcapacity() после увеличения вектора до 100 елементов(resize(100)): " << my_vector_2.capacity() << std::endl;
+	my_vector_2.clear();
+	std::cout << "\tcapacity() после метода clear(): " << my_vector_2.capacity() << std::endl;
+	my_vector_2.push_back(7);
+	std::cout << "\tcapacity() после добавления элемента '7'(push_back(7)): " << my_vector_2.capacity() << std::endl;
+	my_vector_2.shrink_to_fit();
+	std::cout << "\tcapacity() после метода уменьшения вектора до размера количества элементов(shrink_to_fit()): " << my_vector_2.capacity() << std::endl << std::endl;
+
+	std::cout << "my_vector: ";
+	print_Vector(my_vector);
+	std::cout << std::endl;
+
+	std::cout << "my_vector: ";
+	print_Vector(my_vector_2);
+	std::cout << std::endl;
 
 	system("pause > nul");
 	return 0;
+}
+
+template<typename T>
+void print_Vector(const MB::Vector<T>& vector) {
+	for (size_t i = 0; i < vector.size(); ++i) {
+		std::cout << vector.at(i) << " ";
+	}
+	std::cout << std::endl;
 }
