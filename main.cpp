@@ -33,6 +33,10 @@ int main() {
 		std::cout << "\tcapacity(): " << my_vector.capacity() << std::endl << std::endl;
 	}
 
+	std::cout << "\tmy_vector: ";
+	print_Vector(my_vector);
+	std::cout << std::endl;
+
 
 	MB::Vector<int> my_vector_2(10, 5);
 
@@ -47,12 +51,19 @@ int main() {
 	my_vector_2.shrink_to_fit();
 	std::cout << "\tcapacity() после метода уменьшения вектора до размера количества элементов(shrink_to_fit()): " << my_vector_2.capacity() << std::endl << std::endl;
 
-	std::cout << "my_vector: ";
-	print_Vector(my_vector);
+	std::cout << "\tmy_vector_2: ";
+	print_Vector(my_vector_2);
 	std::cout << std::endl;
 
-	std::cout << "my_vector: ";
-	print_Vector(my_vector_2);
+
+	MB::Vector<int> my_vector_3{ 5,7,13,57,99 };
+
+	std::cout << "my_vector_3:" << std::endl;
+	std::cout << "\tПроверка конструктора 'initializer_list' - { 5,7,13,57,99 }." << std::endl << std::endl;
+	std::cout << "\tsize(): " << my_vector_3.size() << std::endl;
+	std::cout << "\tcapacity(): " << my_vector_3.capacity() << std::endl << std::endl;
+	std::cout << "\tmy_vector_3: ";
+	print_Vector(my_vector_3);
 	std::cout << std::endl;
 
 	system("pause > nul");

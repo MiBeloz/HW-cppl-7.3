@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-//#include <initializer_list>
+#include <initializer_list>
 #include <exception>
 
 
@@ -11,7 +11,7 @@ namespace MB {
 		Vector() : m_size(0), m_capacity(0), m_array(nullptr) {}
 		Vector(const size_t size);
 		Vector(const size_t size, const T& val);
-		//Vector(std::initializer_list<T> list);
+		Vector(std::initializer_list<T> list);
 		//Vector(const Vector& vector);
 
 		~Vector();
@@ -63,6 +63,18 @@ namespace MB {
 		m_size = size;
 		m_capacity = m_size / 2 + m_size;
 		m_array = new T[m_capacity]{ val };
+	}
+
+	template<class T>
+	inline Vector<T>::Vector(std::initializer_list<T> list) {
+		m_size = list.size();
+		m_capacity = (m_size / 2 + m_size) + 1;
+		m_array = new T[m_capacity]{ T() };
+
+		auto it = list.begin();
+		for (size_t i = 0; i < m_size; ++i, ++it) {
+			m_array[i] = *it;
+		}
 	}
 
 	template<class T>
