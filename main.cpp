@@ -3,13 +3,13 @@
 #include "Vector.h"
 
 template<typename T>
-void print_Vector(const MB::Vector<T>& vector);
+void print_Vector(const my_class::Vector<T>& vector);
 
 int main() {
 	setlocale(LC_ALL, "ru");
 	std::cout << "\tАналог std::vector\n" << std::endl;
 
-	MB::Vector<int> my_vector;
+	my_class::Vector<int> my_vector;
 
 	std::cout << "my_vector:" << std::endl;
 	try {
@@ -38,7 +38,7 @@ int main() {
 	std::cout << std::endl;
 
 
-	MB::Vector<int> my_vector_2(10, 5);
+	my_class::Vector<int> my_vector_2(10, 5);
 
 	std::cout << "my_vector_2:" << std::endl;
 	std::cout << "\tcapacity() при создании вектора на 10 элементов со значением '5': " << my_vector_2.capacity() << std::endl;
@@ -56,7 +56,7 @@ int main() {
 	std::cout << std::endl;
 
 
-	MB::Vector<int> my_vector_3{ 5,7,13,57,99 };
+	my_class::Vector<int> my_vector_3{ 5,7,13,57,99 };
 
 	std::cout << "my_vector_3:" << std::endl;
 	std::cout << "\tПроверка конструктора 'initializer_list' - { 5,7,13,57,99 }." << std::endl << std::endl;
@@ -71,7 +71,7 @@ int main() {
 }
 
 template<typename T>
-void print_Vector(const MB::Vector<T>& vector) {
+void print_Vector(const my_class::Vector<T>& vector) {
 	for (size_t i = 0; i < vector.size(); ++i) {
 		std::cout << vector.at(i) << " ";
 	}

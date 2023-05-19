@@ -4,7 +4,7 @@
 #include <exception>
 
 
-namespace MB {
+namespace my_class {
 	template<class T>
 	class Vector {
 	public:
