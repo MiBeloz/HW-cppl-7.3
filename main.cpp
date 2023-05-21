@@ -66,6 +66,46 @@ int main() {
 	print_Vector(my_vector_3);
 	std::cout << std::endl;
 
+
+	my_vector = my_vector_3;
+
+	std::cout << "my_vector:" << std::endl;
+	std::cout << "\tПроверка присваивания 'my_vector = my_vector_3'" << std::endl << std::endl;
+	std::cout << "\tsize(): " << my_vector_3.size() << std::endl;
+	std::cout << "\tcapacity(): " << my_vector_3.capacity() << std::endl << std::endl;
+	std::cout << "\tmy_vector: ";
+	print_Vector(my_vector);
+	std::cout << std::endl;
+
+
+	my_class::Vector<int> my_vector_4(my_vector_3);
+
+	std::cout << "my_vector_4:" << std::endl;
+	std::cout << "\tПроверка коструктора копирования 'my_vector_4(my_vector_3)'" << std::endl << std::endl;
+	std::cout << "\tsize(): " << my_vector_4.size() << std::endl;
+	std::cout << "\tcapacity(): " << my_vector_4.capacity() << std::endl << std::endl;
+	std::cout << "\tmy_vector_4: ";
+	print_Vector(my_vector_4);
+	std::cout << std::endl << std::endl;
+
+	std::cout << "\tПроверка сравнения 'my_vector_4 == my_vector_3': ";
+	std::cout << std::boolalpha << (my_vector_4 == my_vector_3) << std::endl << std::endl << std::endl;
+
+	my_vector_4.pop_back();
+	std::cout << "\tПроверка 'pop_back()'" << std::endl << std::endl;
+	std::cout << "\tsize(): " << my_vector_4.size() << std::endl;
+	std::cout << "\tcapacity(): " << my_vector_4.capacity() << std::endl << std::endl;
+	std::cout << "\tmy_vector_4: ";
+	print_Vector(my_vector_4);
+	std::cout << std::endl;
+
+	std::cout << "\tПроверка сравнения 'my_vector_4 == my_vector_3': ";
+	std::cout << std::boolalpha << (my_vector_4 == my_vector_3) << std::endl << std::endl;
+
+	std::cout << "\tПроверка сравнения 'my_vector_4 != my_vector_3': ";
+	std::cout << std::boolalpha << (my_vector_4 != my_vector_3) << std::endl << std::endl;
+
+
 	system("pause > nul");
 	return 0;
 }

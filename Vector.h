@@ -12,12 +12,13 @@ namespace my_class {
 		Vector(const size_t size);
 		Vector(const size_t size, const T& val);
 		Vector(std::initializer_list<T> list);
-		//Vector(const Vector& vector);
+		Vector(const Vector<T>& vector);
 
 		~Vector();
 
-		//Vector& operator=() const;
-		//bool operator==() const;
+		Vector<T>& operator=(const Vector<T>& other);
+		bool operator==(const Vector<T>& other) const;
+		bool operator!=(const Vector<T>& other) const;
 
 		T& at(const size_t index) const;
 		T& operator[](const size_t index);
@@ -36,7 +37,7 @@ namespace my_class {
 
 		void clear();
 		void push_back(T value);
-		//void pop_back();
+		void pop_back();
 	
 	private:
 		size_t m_size;
@@ -78,9 +79,69 @@ namespace my_class {
 	}
 
 	template<class T>
+	inline Vector<T>::Vector(const Vector<T>& vector) {
+		m_capacity = vector.m_capacity;
+		m_size = vector.m_size;
+		if (m_capacity != 0) {
+			m_array = new T[m_capacity]{};
+			if (m_size > m_capacity) {
+				throw std::exception("vector error");
+			}
+			for (size_t i = 0; i < m_size; ++i) {
+				m_array[i] = vector.m_array[i];
+			}
+		}
+		else {
+			m_array = nullptr;
+		}
+	}
+
+	template<class T>
 	inline Vector<T>::~Vector() {
 		delete[] m_array;
 		m_array = nullptr;
+	}
+
+	template<class T>
+	inline Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
+		if (this != &other) {
+			delete[] m_array;
+			m_array = nullptr;
+
+			m_capacity = other.m_capacity;
+			m_size = other.m_size;
+			if (m_capacity != 0) {
+				m_array = new T[m_capacity]{};
+				if (m_size > m_capacity) {
+					throw std::exception("vector error");
+				}
+				for (size_t i = 0; i < m_size; ++i) {
+					m_array[i] = other.m_array[i];
+				}
+			}
+		}
+
+		return *this;
+	}
+
+	template<class T>
+	inline bool Vector<T>::operator==(const Vector<T>& other) const {
+		if (m_size == other.m_size) {
+			for (size_t i = 0; i < m_size; ++i) {
+				if (m_array[i] != other.m_array[i]) {
+					return false;
+				}
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	template<class T>
+	inline bool Vector<T>::operator!=(const Vector<T>& other) const {
+		return !(*this == other);
 	}
 
 	template<class T>
@@ -201,5 +262,11 @@ namespace my_class {
 		}
 		m_array[m_size] = value;
 		m_size++;
+	}
+
+	template<class T>
+	inline void Vector<T>::pop_back() {
+		m_array[m_size - 1] = T();
+		m_size--;
 	}
 }
